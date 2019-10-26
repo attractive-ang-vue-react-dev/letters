@@ -1,0 +1,116 @@
+html, body {
+  font-family: 'Karla', sans-serif;
+}
+
+.blue {
+  color: #4AA0DE;
+}
+
+.bg-blue {
+  background-color: #4AA0DE;
+}
+
+.red {
+  color: #EE6763;
+}
+
+.bg-red {
+  background-color:	#EE6763;
+}
+
+.logo {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  padding: 2em;
+}
+
+.logo img {
+  max-width: 300px;
+}
+
+.sub-logo {
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 2em;
+  background-color: black;
+  margin-bottom: 40px;
+}
+
+.btn {
+  color: white;
+  border-radius: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.jumbotron {
+  text-align: center;
+  color: white;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.list-h1 {
+  color: black;
+  font-size: 2em;
+  margin-bottom: 2em;
+}
+
+.list-h2 {
+  color: black;
+  font-size: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.list-h3 {
+  color: black;
+  font-size: 1em;
+  margin-bottom: 1em;
+}
+
+.recp-list .row {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.a-card {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: white;
+  border-radius: 20px;
+}
+
+.link {
+  color: #ccc;
+  text-decoration: underline;
+}
+
+.a-card-h {
+  border-radius: 40px;
+  background-color: white;
+  color: black;
+  font-size: 1.5em;
+  padding: 0.2em;
+  padding-top: 0.1em;
+  width: 1.8em;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.footer {
+  height: 5em;
+  background-color: #ddd;
+}
+
+.footer .bottom {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  top: 60%;
+}

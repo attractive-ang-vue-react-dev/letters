@@ -1,0 +1,46 @@
+* {
+  font-family: 'Roboto Mono', monospace;
+}
+
+.navbar-logo {
+  max-width: 100px;
+}
+
+.blue {
+  color: #4AA0DE;
+}
+
+.bg-blue {
+  background-color: #4AA0DE;
+}
+
+.red {
+  color: #EE6763;
+}
+
+.bg-red {
+  background-color:	#EE6763;
+}
+
+.nav-link {
+  color: white;
+}
+
+.nav-sub {
+  color: white;
+  font-size: 1em;
+}
+
+.navbar-brand {
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.sidebar {
+  box-shadow: none !important;
+}
+
+.active {
+  background-color: #4AA0DE;
+  color: white !important;
+}
