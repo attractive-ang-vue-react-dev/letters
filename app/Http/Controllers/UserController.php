@@ -170,9 +170,9 @@ class UserController extends Controller
       }
 
       if (!$is_draft) {
-        if (strlen($content) < 100) {
+        if (strlen($content) < 200) {
           return redirect()->back()->withErrors([
-            "Your letter is too short."
+            "Your letter is too short. It must be at least 200 characters long."
           ]);
         }
       }
@@ -191,7 +191,73 @@ class UserController extends Controller
       if ($is_draft) {
         return redirect("/history")->with("success", "You've saved a draft!");
       } else {
-        return "You cannot send a letter yet.";
+        $lob_key = env("LOB_KEY");
+
+        $lob = new \Lob\Lob($lob_key);
+
+        $from_name = $user->first_name . " " . $user->last_name;
+        $from_address_1 = $user->addr_line_1;
+        $from_address_2 = $user->addr_line_2;
+        $from_city = $user->city;
+        $from_state = $user->state;
+        $from_zip = $user->postal;
+
+        $to_name = $contact->first_name . " " . $contact->last_name . ", " . $contact->inmate_number;
+        $to_facility_name = $contact->facility_name;
+        $to_address = $contact->facility_address;
+        $to_city = $contact->facility_city;
+        $to_state = $contact->facility_state;
+        $to_zip = $contact->facility_postal;
+
+        // $lob_from = $lob->addresses()->create(array(
+        //   'name' => $from_name,
+        //   'address_line1' => $from_address_1,
+        //   'address_line2' => $from_address_2,
+        //   'address_city' => $from_city,
+        //   'address_state' => $from_state,
+        //   'address_zip' => $from_zip
+        // ));
+        $lob_from = array(
+          'name' => $from_name,
+          'address_line1' => $from_address_1,
+          'address_line2' => $from_address_2,
+          'address_city' => $from_city,
+          'address_state' => $from_state,
+          'address_zip' => $from_zip
+        );
+
+        // $lob_to = $lob->addresses()->create(array(
+        //   'name' => $to_name,
+        //   'address_line1' => $to_facility_name,
+        //   'address_line2' => $to_address,
+        //   'address_city' => $to_city,
+        //   'address_state' => $to_state,
+        //   'address_zip' => $to_zip
+        // ));
+        $lob_to = array(
+          'name' => $to_name,
+          'address_line1' => $to_facility_name,
+          'address_line2' => $to_address,
+          'address_city' => $to_city,
+          'address_state' => $to_state,
+          'address_zip' => $to_zip
+        );
+
+        $lob_letter = $lob->letters()->create(array(
+          'to' => $lob_to,
+          'from' => $lob_from,
+          'file' => "<html><body>$content</body></html>",
+          'description' => 'Letter from ' . $user->first_name . " " . $user->last_name . " to Inmate # " . $contact->inmate_number,
+          'color' => false
+        ));
+
+        $new_letter->sent = true;
+        $new_letter->save();
+
+        $user->credit -= 1;
+        $user->save();
+
+        return redirect("/history");
       }
     }
 

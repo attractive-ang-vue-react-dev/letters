@@ -39,9 +39,9 @@
                 }
 
                 $contact = \App\Contact::find($l->contact_id);
-                $contact_name = $contact->first_name . " " . $contact->last_name;
+                $contact_name = $contact->first_name . " " . $contact->last_name . ", " . $contact->inmate_number;
 
-                $content = substr($l->content, 0, 50);
+                $content = substr($l->content, 0, 100) . "...";
               ?>
               <tr>
                 <td>{{ \Carbon\Carbon::parse($l->created_at)->toDayDateTimeString() }}</td>

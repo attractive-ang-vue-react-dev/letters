@@ -16,6 +16,16 @@
       </div>
     </div>
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     @if(count($contacts) > 0)
       <form action="/letter/send" method="POST">
         @csrf
@@ -26,7 +36,7 @@
 
         <input type="hidden" name="is_draft" id="is-draft" value="no">
 
-        <select class="custom-select" name="contact_id">
+        <select class="custom-select form-control" name="contact_id">
           <option selected>Select a Contact</option>
 
           @foreach($contacts as $c)

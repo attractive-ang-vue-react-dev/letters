@@ -1,6 +1,8 @@
 @extends('layouts.letters')
 
 @section('content')
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">Contacts</h1>
@@ -15,6 +17,16 @@
         </button> --}}
       </div>
     </div>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     @if(count($contacts) > 0)
       <div class="table-responsive">
@@ -34,7 +46,7 @@
                 <td>{{ $c->first_name }} {{ $c->middle_name }} {{ $c->last_name}}</td>
                 <td>{{ $c->facility_name }}</td>
                 <td>
-                  <a class="btn btn-sm btn-primary" href="/letter/compose/{{ $c->id }}">Send letter</a>
+                  <a class="btn btn-sm btn-primary" href="/compose">Send letter</a>
                   <a class="btn btn-sm btn-danger" href="/contacts/remove/{{ $c->id }}" onclick="return confirm('Are you sure?');">Remove</a>
                 </td>
               </tr>

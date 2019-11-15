@@ -1,5 +1,5 @@
 * {
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Poppins', sans-serif;
 }
 
 .navbar-logo {
@@ -23,7 +23,14 @@
 }
 
 .nav-link {
-  color: white;
+  font-size: 1.3em;
+  color: #757575 !important;
+  margin: 10px;
+}
+
+.nav-link-logout {
+  position: fixed;
+  bottom: 0px;
 }
 
 .nav-sub {
@@ -41,6 +48,46 @@
 }
 
 .active {
+  color: #4AA0DE !important;
+}
+
+.sidebar {
+  padding-top: 0px !important;
+}
+
+.sidebar-top {
+  width: 100%;
   background-color: #4AA0DE;
-  color: white !important;
+  text-align: center;
+  padding: 20px;
+}
+
+.sidebar-top-item {
+  display: block;
+}
+
+.sidebar-top-h {
+  color: white;
+  font-size: 2em;
+}
+
+.sidebar-sticky {
+  padding-top: 0px !important;
+}
+
+[role="main"] {
+  padding-top: 0px !important;
+}
+
+.form-control {
+  margin-top: 10px;
+}
+
+button {
+  margin: 10px;
+}
+
+.nav-link i {
+  margin-right: 15px;
+  width: 20px;
 }
