@@ -243,10 +243,12 @@ class UserController extends Controller
           'address_zip' => $to_zip
         );
 
+        $date = \Carbon\Carbon::now()->toFormattedDateString();
+
         $lob_letter = $lob->letters()->create(array(
           'to' => $lob_to,
           'from' => $lob_from,
-          'file' => "<html><body>$content</body></html>",
+          'file' => "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 20%;}</style><p class='date'>$date</p><p class='content'>$content</p></body></html>",
           'description' => 'Letter from ' . $user->first_name . " " . $user->last_name . " to Inmate # " . $contact->inmate_number,
           'color' => false
         ));

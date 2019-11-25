@@ -2,6 +2,14 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+
+    <!-- SEO Meta Data -->
+    <meta name="keywords" content="inmate, prison, letters, reform, open source"/>
+    <meta name="author" content="Ameelio.org" />
+    <meta name="copyright" content="Ameelio" />
+    <meta name="robots" content="index,follow" />
+    <!-- End SEO Meta Data -->
+
     <title>Ameelio Letters | Send letters to incarcerated loved ones for free</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
