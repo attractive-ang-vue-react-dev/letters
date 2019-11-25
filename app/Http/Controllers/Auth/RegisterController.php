@@ -52,7 +52,7 @@ class RegisterController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'addr_line_1' => ['required', 'string', 'max:255'],
-            'addr_line_2' => ['required', 'string', 'max:255'],
+            'addr_line_2' => ['max:255'],
             'city' => ['required', 'string', 'max:255'],
             'state' => ['required', 'string', 'max:2'],
             'postal' => ['required', 'string', 'max:5'],

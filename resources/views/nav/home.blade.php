@@ -27,7 +27,7 @@
     @endif
 
     @if(count($contacts) > 0)
-      <form action="/letter/send" method="POST">
+      <form action="/letter/send" method="POST" id="send-letter-form">
         @csrf
 
         @if(isset($letter_id))
@@ -45,9 +45,9 @@
         </select>
 
 
-        <textarea class="form-control" name="content" placeholder="Your letter goes here." rows="10">@if(isset($content)){{ $content }} @endif</textarea>
+        <textarea class="form-control" id="content" name="content" placeholder="Your letter goes here." rows="10">@if(isset($content)){{ $content }} @endif</textarea>
 
-        <button class="btn btn-sm btn-primary" type="submit">Send Letter</button>
+        <button class="btn btn-sm btn-primary" id="send-letter" type="submit">Send Letter</button>
         <button class="btn btn-sm btn-secondary" id="save-draft">Save Draft</button>
       </form>
     @else
@@ -56,11 +56,44 @@
       <p><a href="/contacts" class="btn btn-sm btn-primary">Add a Contact</a></p>
     @endif
 
+    <div class="modal" tabindex="-1" role="dialog" id="modal-review">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Review your letter</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="modal-letter-content"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="send-letter-final" class="btn btn-primary">Send</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script>
       $(document).ready(function() {
         $("#save-draft").click(function(e) {
           $("#is-draft").val('yes');
           return true;
+        });
+
+        $("#send-letter").click(function(e) {
+          e.preventDefault();
+          var modal = $("#modal-review");
+          var content = $("#content").val();
+          $("#modal-letter-content").html(content);
+          modal.modal('show');
+          return false;
+        });
+
+        $("#send-letter-final").click(function(e) {
+          $("#send-letter-form").submit();
         });
       });
     </script>

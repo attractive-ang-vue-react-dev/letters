@@ -50,7 +50,7 @@
 
               <div class="form-group row">
                   <div class="col-md-12">
-                      <input id="addr_line_2" type="text" class="form-control @error('addr_line_2') is-invalid @enderror" name="addr_line_2" value="{{ old('addr_line_2') }}" required autocomplete="addr_line_2" autofocus placeholder="Address Line 2">
+                      <input id="addr_line_2" type="text" class="form-control @error('addr_line_2') is-invalid @enderror" name="addr_line_2" value="{{ old('addr_line_2') }}" autocomplete="addr_line_2" autofocus placeholder="Address Line 2">
 
                       @error('addr_line_2')
                           <span class="invalid-feedback" role="alert">

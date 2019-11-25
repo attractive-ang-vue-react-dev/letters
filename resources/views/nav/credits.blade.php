@@ -21,11 +21,12 @@
 
     <p>You can purchase more credits by clicking the <i>Purchase Credits</i> button below.</p>
 
-    <a class="btn btn-lg btn-primary" href="#">Purchase Credits</a>
+    <a class="btn btn-lg btn-primary" href="#">Purchase Credits</a><br>
+    <br>
 
     <p>If you are truly unable to afford the small price we charge for Letter Credits, then please contact us at the email below.</p>
 
-    <p><b>support@ameelio.com</b></p>
+    <p><b style="font-size: 24px;">team@ameelio.com</b></p>
 
   </main>
 @endsection
