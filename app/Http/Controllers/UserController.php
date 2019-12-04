@@ -261,8 +261,6 @@ class UserController extends Controller
 
         $date = \Carbon\Carbon::now()->toFormattedDateString();
 
-        return url("/letters/html/" . $new_letter->id);
-
         $lob_letter = $lob->letters()->create(array(
           'to' => $lob_to,
           'from' => $lob_from,
