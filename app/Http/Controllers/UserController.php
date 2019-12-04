@@ -153,6 +153,17 @@ class UserController extends Controller
       $contact_id = $request->input('contact_id');
       $content = $request->input('content');
 
+      $data = $request->validate([
+        'attached_image' => 'image|max:5000'
+      ]);
+
+      if ($data["attached_image"]) {
+        $attached_img = file_get_contents($data["attached_image"]);
+      } else {
+        $attached_img = false;
+      }
+
+
       $is_draft = $request->input('is_draft');
 
       if ($is_draft == "yes") {
@@ -186,6 +197,11 @@ class UserController extends Controller
       $new_letter->user_id = $user->id;
       $new_letter->contact_id = $contact_id;
       $new_letter->content = $content;
+
+      if ($attached_img) {
+        $new_letter->attached_img_src = $attached_img;
+      }
+
       $new_letter->save();
 
       if ($is_draft) {
@@ -245,10 +261,17 @@ class UserController extends Controller
 
         $date = \Carbon\Carbon::now()->toFormattedDateString();
 
+        if ($attached_img) {
+          $letter_content = "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 5in;}</style><p class='date'>$date</p><p class='content'>$content</p><p><img src='$attached_img' style='max-width: 9in;'></p><p style='font-size: 12px; color: #eee;'>This letter was sent for free. Learn more at <b><i>ameelio.org</i></b>.</p></body></html>";
+        } else {
+          $letter_content = "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 5in;}</style><p class='date'>$date</p><p class='content'>$content</p><p style='font-size: 12px; color: #eee;'>This letter was sent for free. Learn more at <b><i>ameelio.org</i></b>.</p></body></html>";
+        }
+
+
         $lob_letter = $lob->letters()->create(array(
           'to' => $lob_to,
           'from' => $lob_from,
-          'file' => "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 20%;}</style><p class='date'>$date</p><p class='content'>$content</p></body></html>",
+          'file' => $letter_content,
           'description' => 'Letter from ' . $user->first_name . " " . $user->last_name . " to Inmate # " . $contact->inmate_number,
           'color' => false
         ));
