@@ -14,7 +14,7 @@ class AddImageColumnToLettersTable extends Migration
     public function up()
     {
         Schema::table('letters', function (Blueprint $table) {
-            $table->text('attached_img_src')->nullable();
+            $table->mediumText('attached_img_src')->nullable();
         });
     }
 

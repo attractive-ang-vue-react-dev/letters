@@ -158,7 +158,7 @@ class UserController extends Controller
       ]);
 
       if ($data["attached_image"]) {
-        $attached_img = file_get_contents($data["attached_image"]);
+        $attached_img = base64_encode(file_get_contents($data["attached_image"]));
       } else {
         $attached_img = false;
       }
@@ -261,19 +261,14 @@ class UserController extends Controller
 
         $date = \Carbon\Carbon::now()->toFormattedDateString();
 
-        if ($attached_img) {
-          $letter_content = "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 5in;}</style><p class='date'>$date</p><p class='content'>$content</p><p><img src='$attached_img' style='max-width: 9in;'></p><p style='font-size: 12px; color: #eee;'>This letter was sent for free. Learn more at <b><i>ameelio.org</i></b>.</p></body></html>";
-        } else {
-          $letter_content = "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 5in;}</style><p class='date'>$date</p><p class='content'>$content</p><p style='font-size: 12px; color: #eee;'>This letter was sent for free. Learn more at <b><i>ameelio.org</i></b>.</p></body></html>";
-        }
-
+        return url("/letters/html/" . $new_letter->id);
 
         $lob_letter = $lob->letters()->create(array(
           'to' => $lob_to,
           'from' => $lob_from,
-          'file' => $letter_content,
+          'file' => url("/letters/html/" . $new_letter->id),
           'description' => 'Letter from ' . $user->first_name . " " . $user->last_name . " to Inmate # " . $contact->inmate_number,
-          'color' => false
+          'color' => true
         ));
 
         $new_letter->sent = true;
@@ -319,5 +314,24 @@ class UserController extends Controller
       $letter->delete();
 
       return redirect()->back()->with("success", "You've deleted a letter.");
+    }
+
+    public function letter_html($letter_id) {
+      $letter = Letter::find($letter_id);
+
+      $date = \Carbon\Carbon::parse($letter->created_at)->toFormattedDateString();
+
+      $attached_img = $letter->attached_img_src;
+      $content = $letter->content;
+
+      if ($attached_img) {
+        $letter_content = "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 4in;}</style><p class='date'>$date</p><p class='content'>$content</p><p><img src='data:image/png;base64, $attached_img' style='max-width: 5in;'></p><p style='font-size: 12px; color: #aaa;'>This letter was sent for free. Learn more at <b><i>ameelio.org</i></b>.</p></body></html>";
+      } else {
+        $letter_content = "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 4in;}</style><p class='date'>$date</p><p class='content'>$content</p><p style='font-size: 12px; color: #aaa;'>This letter was sent for free. Learn more at <b><i>ameelio.org</i></b>.</p></body></html>";
+      }
+
+      $letter_content = str_replace("\n", "<br>", $letter_content);
+
+      return $letter_content;
     }
 }
