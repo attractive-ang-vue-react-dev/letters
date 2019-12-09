@@ -19,45 +19,136 @@ class UserController extends Controller
       return redirect('/login');
     }
 
+    public function profile() {
+        $user = Auth::user();
+        return view('nav.profile')->with([
+            "user" => $user,
+            "tab" => "profile"
+        ]);
+    }
+
+    public function letter() {
+        $user = Auth::user();
+        return view('nav.letter')->with([
+          "user" => $user,
+          "tab" => "letter"
+        ]);
+    }
+
     public function compose() {
-      $user = Auth::user();
-
-      $contacts = Contact::where('user_id', $user->id)->get();
-
-      return view('nav.home')->with([
-        "user" => $user,
-        "tab" => "compose",
-        "contacts" => $contacts
-      ]);
+        $user = Auth::user();
+        $contacts = Contact::where('user_id', $user->id)->paginate(0);
+        return view('nav.compose')->with([
+            "user" => $user,
+            "tab" => "compose",
+            "contacts" => []
+        ]);
     }
 
     public function contacts() {
-      $user = Auth::user();
+        $user = Auth::user();
+        $contacts = Contact::where('user_id', $user->id)->paginate(2);
+        return view('nav.contacts')->with([
+          "user" => $user,
+          "tab" => "contacts",
+          "contacts" => $contacts
+        ]);
+    }
 
-      $contacts = Contact::where('user_id', $user->id)->get();
+    public function credits() {
+        $user = Auth::user();
+        return view('nav.credits')->with([
+          "user" => $user,
+          "tab" => "credits"
+        ]);
+    }
 
-      return view('nav.contacts')->with([
+    public function review_letter(Request $request) {
+        $user = Auth::user();
+        $data = $request->validate([
+            'name' => 'required',
+            'contact_id' => 'required',
+            'content' => 'required',
+            ''
+        ]);
+        $inmate_number = $request->contact_id;
+        $contacts = Contact::where('inmate_number', $inmate_number)->get();
+        return view('nav.review')->with([
+            "user" => $user,
+            "tab" => "review",
+            "contacts" => [
+                "name" => $request->name,
+                "contact_id" => $request->contact_id,
+                "content" => $request->content,
+            ]
+        ]);
+    }
+
+    public function sent() {
+        $user = Auth::user();
+        return view('nav.sent')->with([
+            "user" => $user,
+            "tab" => "compose"
+          ]);
+    }
+
+    public function tracker() {
+        $user = Auth::user();
+        return view('nav.tracker')->with([
+            "user" => $user,
+            "tab" => "tracker"
+        ]);
+    }
+
+    public function search(Request $request) {
+        $filter = $request->filter;
+        $user = Auth::user();
+        $contacts =Contact::where('id','like', '%'.$filter.'%')
+                      ->orWhere('first_name','like','%'.$filter.'%')
+                      ->orWhere('middle_name','like','%'.$filter.'%')
+                      ->orWhere('last_name','like','%'.$filter.'%')
+                      ->orWhere('inmate_number','like','%'.$filter.'%')
+                      ->orWhere('facility_name','like','%'.$filter.'%')
+                      ->orWhere('facility_city','like','%'.$filter.'%')
+                      ->paginate(5);
+        return view('nav.compose')->with([
+        "user" => $user,
+        "tab" => "compose",
+        "contacts" => $contacts
+        ]);
+    }
+
+    public function contact_search(Request $request) {
+        $filter = $request->filter;
+        $user = Auth::user();
+        $contacts =Contact::where('id','like', '%'.$filter.'%')
+                            ->orWhere('first_name','like','%'.$filter.'%')
+                            ->orWhere('middle_name','like','%'.$filter.'%')
+                            ->orWhere('last_name','like','%'.$filter.'%')
+                            ->orWhere('inmate_number','like','%'.$filter.'%')
+                            ->orWhere('facility_name','like','%'.$filter.'%')
+                            ->orWhere('facility_city','like','%'.$filter.'%')
+                            ->paginate(5);
+        return view('nav.contacts')->with([
         "user" => $user,
         "tab" => "contacts",
         "contacts" => $contacts
-      ]);
+        ]);
     }
+
 
     public function history() {
       $user = Auth::user();
-
       $letters = Letter::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
-
       return view('nav.history')->with([
         "user" => $user,
         "tab" => "history",
-        "letters" => $letters
+        "user" => $letters
       ]);
     }
 
     public function add_contact(Request $request) {
       $user = Auth::user();
-
       $data = $request->validate([
         'first_name' => 'required|max:255',
         'middle_name' => 'required|max:255',
@@ -71,7 +162,6 @@ class UserController extends Controller
       ]);
 
       $new_contact = new Contact;
-
       $new_contact->user_id = $user->id;
       $new_contact->first_name = $data['first_name'];
       $new_contact->middle_name = $data['middle_name'];
@@ -82,7 +172,6 @@ class UserController extends Controller
       $new_contact->facility_city = $data['facility_city'];
       $new_contact->facility_state = $data['facility_state'];
       $new_contact->facility_postal = $data['facility_postal'];
-
       $new_contact->save();
 
       return redirect('/contacts');
@@ -90,9 +179,7 @@ class UserController extends Controller
 
     public function remove_contact($id) {
       $user = Auth::user();
-
       $contact = Contact::find($id);
-
       if ($contact) {
         if ($contact->user_id == $user->id) {
           $contact->delete();
@@ -102,27 +189,8 @@ class UserController extends Controller
       return redirect('/contacts');
     }
 
-    public function profile() {
-      $user = Auth::user();
-
-      return view('nav.profile')->with([
-        "user" => $user,
-        "tab" => "profile"
-      ]);
-    }
-
-    public function credits() {
-      $user = Auth::user();
-
-      return view('nav.credits')->with([
-        "user" => $user,
-        "tab" => "credits"
-      ]);
-    }
-
     public function save_profile(Request $request) {
       $user = Auth::user();
-
       $data = $request->validate([
         'first_name' => 'required|max:255',
         'last_name' => 'required|max:255',
@@ -140,30 +208,15 @@ class UserController extends Controller
       $user->city = $data['city'];
       $user->state = $data['state'];
       $user->postal = $data['postal'];
-
       $user->save();
-
       return redirect('/profile');
     }
 
     public function send_letter(Request $request) {
       $user = Auth::user();
-
       $letter_id = $request->input('letter_id');
       $contact_id = $request->input('contact_id');
       $content = $request->input('content');
-
-      $data = $request->validate([
-        'attached_image' => 'image|max:5000'
-      ]);
-
-      if ($data["attached_image"]) {
-        $attached_img = base64_encode(file_get_contents($data["attached_image"]));
-      } else {
-        $attached_img = false;
-      }
-
-
       $is_draft = $request->input('is_draft');
 
       if ($is_draft == "yes") {
@@ -173,7 +226,6 @@ class UserController extends Controller
       }
 
       $contact = Contact::find($contact_id);
-
       if (!$contact) {
         return redirect()->back()->withErrors([
           "That Contact doesn't exist."
@@ -193,24 +245,16 @@ class UserController extends Controller
       } else {
         $new_letter = new Letter;
       }
-
       $new_letter->user_id = $user->id;
       $new_letter->contact_id = $contact_id;
       $new_letter->content = $content;
-
-      if ($attached_img) {
-        $new_letter->attached_img_src = $attached_img;
-      }
-
       $new_letter->save();
 
       if ($is_draft) {
         return redirect("/history")->with("success", "You've saved a draft!");
       } else {
         $lob_key = env("LOB_KEY");
-
         $lob = new \Lob\Lob($lob_key);
-
         $from_name = $user->first_name . " " . $user->last_name;
         $from_address_1 = $user->addr_line_1;
         $from_address_2 = $user->addr_line_2;
@@ -264,9 +308,9 @@ class UserController extends Controller
         $lob_letter = $lob->letters()->create(array(
           'to' => $lob_to,
           'from' => $lob_from,
-          'file' => url("/letters/html/" . $new_letter->id),
+          'file' => "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 20%;}</style><p class='date'>$date</p><p class='content'>$content</p></body></html>",
           'description' => 'Letter from ' . $user->first_name . " " . $user->last_name . " to Inmate # " . $contact->inmate_number,
-          'color' => true
+          'color' => false
         ));
 
         $new_letter->sent = true;
@@ -281,7 +325,6 @@ class UserController extends Controller
 
     public function continue_draft($letter_id) {
       $user = Auth::user();
-
       $letter = Letter::find($letter_id);
 
       if (!$letter) {
@@ -289,7 +332,6 @@ class UserController extends Controller
       }
 
       $contacts = Contact::where('user_id', $user->id)->get();
-
       return view('nav.home')->with([
         "user" => $user,
         "tab" => "compose",
@@ -312,24 +354,5 @@ class UserController extends Controller
       $letter->delete();
 
       return redirect()->back()->with("success", "You've deleted a letter.");
-    }
-
-    public function letter_html($letter_id) {
-      $letter = Letter::find($letter_id);
-
-      $date = \Carbon\Carbon::parse($letter->created_at)->toFormattedDateString();
-
-      $attached_img = $letter->attached_img_src;
-      $content = $letter->content;
-
-      if ($attached_img) {
-        $letter_content = "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 4in;}</style><p class='date'>$date</p><p class='content'>$content</p><p><img src='data:image/png;base64, $attached_img' style='max-width: 5in;'></p><p style='font-size: 12px; color: #aaa;'>This letter was sent for free. Learn more at <b><i>ameelio.org</i></b>.</p></body></html>";
-      } else {
-        $letter_content = "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 4in;}</style><p class='date'>$date</p><p class='content'>$content</p><p style='font-size: 12px; color: #aaa;'>This letter was sent for free. Learn more at <b><i>ameelio.org</i></b>.</p></body></html>";
-      }
-
-      $letter_content = str_replace("\n", "<br>", $letter_content);
-
-      return $letter_content;
     }
 }

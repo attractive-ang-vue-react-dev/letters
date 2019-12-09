@@ -1,7 +1,7 @@
 @extends('layouts.letters')
 
 @section('content')
-  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+  <main role="main" class="content">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">Letter History</h1>
       <div class="btn-toolbar mb-2 mb-md-0">
@@ -63,7 +63,6 @@
                   @if($is_draft)
                     <a class="btn btn-sm btn-primary" href="/compose/continue/{{ $l->id }}">Continue Letter</a>
                   @endif
-
                   <a class="btn btn-sm btn-danger" href="/letter/delete/{{ $l->id }}" onclick="return confirm('Are you sure?');">Delete</a>
                 </td>
               </tr>

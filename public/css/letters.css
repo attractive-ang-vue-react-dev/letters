@@ -1,9 +1,19 @@
-* {
-  font-family: 'Poppins', sans-serif;
-}
 
 .navbar-logo {
-  max-width: 100px;
+    max-width: 140px;
+    vertical-align: -webkit-baseline-middle;
+    position: relative;
+    left: 30px;
+}
+
+.profile-img {
+    width:35%;
+    border: 2px solid white;
+
+}
+
+.profile-img > img {
+    border-radius: 50% !important;
 }
 
 .blue {
@@ -22,34 +32,15 @@
   background-color:	#EE6763;
 }
 
-.nav-link {
-  font-size: 1.3em;
-  color: #757575 !important;
-  margin: 10px;
-}
-
-.nav-link-logout {
-  position: fixed;
-  bottom: 0px;
-}
-
-.nav-sub {
-  color: white;
-  font-size: 1em;
-}
-
-.navbar-brand {
-  box-shadow: none !important;
-  background: none !important;
-}
-
 .sidebar {
   box-shadow: none !important;
 }
 
 .active {
-  color: #4AA0DE !important;
+    background: rgba(200, 200, 200, 0.315);
+    width:85%;
 }
+
 
 .sidebar {
   padding-top: 0px !important;
@@ -71,6 +62,10 @@
   font-size: 2em;
 }
 
+.log-out {
+    position: relative;
+    margin-top:50%;
+}
 .sidebar-sticky {
   padding-top: 0px !important;
 }
@@ -80,7 +75,8 @@
 }
 
 .form-control {
-  margin-top: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 button {
@@ -91,3 +87,17 @@ button {
   margin-right: 15px;
   width: 20px;
 }
+
+
+.login-form {
+    border: 1px solid black;
+
+}
+
+
+.sent-text > h2 {
+    position: relative;
+    overflow: hidden;
+    color: #2CA8FF;
+  }
+

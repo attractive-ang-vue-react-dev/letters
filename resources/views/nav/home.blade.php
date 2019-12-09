@@ -27,7 +27,7 @@
     @endif
 
     @if(count($contacts) > 0)
-      <form action="/letter/send" method="POST" id="send-letter-form" enctype="multipart/form-data">
+      <form action="/letter/send" method="POST" id="send-letter-form">
         @csrf
 
         @if(isset($letter_id))
@@ -47,12 +47,7 @@
 
         <textarea class="form-control" id="content" name="content" placeholder="Your letter goes here." rows="10">@if(isset($content)){{ $content }} @endif</textarea>
 
-        <div class="custom-file" style="margin-top: 20px;">
-          <input type="file" class="custom-file-input" name="attached_image" id="customFile" onChange='update_preview(this);'>
-          <label class="custom-file-label" for="customFile">Choose an image (PNG or JPG; No larger than 5MB)</label>
-        </div>
-
-        <button class="btn btn-sm btn-primary" id="send-letter" type="submit">Continue</button>
+        <button class="btn btn-sm btn-primary" id="send-letter" type="submit">Send Letter</button>
         <button class="btn btn-sm btn-secondary" id="save-draft">Save Draft</button>
       </form>
     @else
@@ -72,7 +67,6 @@
           </div>
           <div class="modal-body">
             <p id="modal-letter-content"></p>
-            <img id="previewImg" style="max-width: 300px;">
           </div>
           <div class="modal-footer">
             <button type="button" id="send-letter-final" class="btn btn-primary">Send</button>
@@ -83,9 +77,6 @@
     </div>
 
     <script>
-      function update_preview(input){
-         $('#previewImg')[0].src = (window.URL ? URL : webkitURL).createObjectURL(input.files[0]);
-      }
       $(document).ready(function() {
         $("#save-draft").click(function(e) {
           $("#is-draft").val('yes');
@@ -95,7 +86,7 @@
         $("#send-letter").click(function(e) {
           e.preventDefault();
           var modal = $("#modal-review");
-          var content = $("#content").val().replace(/\n/g, "<br>");
+          var content = $("#content").val();
           $("#modal-letter-content").html(content);
           modal.modal('show');
           return false;

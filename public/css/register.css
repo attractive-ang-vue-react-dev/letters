@@ -1,0 +1,17 @@
+.form-container {
+    padding: 5%;;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    color: #2CA8FF !important;
+    display: inline-block;
+}
