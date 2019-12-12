@@ -17,23 +17,42 @@
     </div>
 <div class="content">
     <div class="wrapper row">
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-md-5">
             <h4 class="card-category">Sent Letters</h4>
 
-            @foreach($user->all() as $user)
-                <div class="card">
 
-                    <div class="row card-body col-sm-12">
-                        <div class="col-sm-3">
-                            <img src="/user.jpg" style="border-radius:50%; width:50%;" alt="..">
-                        </div>
-                        <div class="col-sm-9"><h6>{{ $user->first_name}}</h6><h6>{{ $user->created_at }}<br>sent</h6></div>
+                <div class="card">
+                    <div class=" card-body">
+                        @if (count($contacts) > 1 )
+                            @foreach($contacts->all() as $c)
+                                <table class="table">
+                                    <thead>
+                                        <!-- <tr>
+                                            <td>
+                                                <div class=" logo-image">
+                                                    <h3 style="text-transform: uppercase;">{{ $user->facility_name}} </h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <h6>{{ $user->first_name}}<br>{{ $user->created_at }}<br>Sent</h6>
+                                                </div>
+                                            </td>
+                                        </tr> -->
+                                    </thead>
+                                </table>
+                            @endforeach
+                            @else
+                                <div class="card-category">You didn't send any message.</div>
+                            @endif
+                            <hr>
+                        <i class='far fa-clock'></i> Last 7 days
                     </div>
                 </div>
-            @endforeach
+
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6">
-            <div class="col-sm-10">
+        <div class="col-md-6">
+            <div class="col-md-10 ">
                 <h4 class="card-category">Compose Letter</h4>
                 <div class="card">
                     <div class="card-header">
@@ -48,35 +67,29 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-10 col-md-10 col-sm-10 ">
+            <div class="col-md-10">
                 <h4 class="card-category">Credits</h4>
                 <div class="card">
                     <div class="card-header"></div>
                     <div class="card-body">
-                        <div class="chart-area">
-                            <div class="row col-sm-12">
-                                <div class="col-sm-2"><h6><a class="" href="#">0</a></h6></div>
-                                <div class="col-sm-7">
-                                    <h6>Free Letter Credits</h6>
-                                </div>
-                                <div class="col-sm-3"></div>
-                            </div>
-                            <hr>
-                            <div class="row col-sm-12">
-                                <div class="col-sm-2"><h6><a class="" href="#">0</a></h6></div>
-                                <div class="col-sm-7">
-                                    <h6>Purchased Letter Credits</h6>
-                                </div>
-                                <div class="col-sm-3">
-                                    <a class="" href="#"><h6>GET MORE</h6></a>
-                                </div>
-                                <hr>
-                            </div>
-                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td><b><a class="" href="#">0</a></b></td>
+                                    <td><b>Free Letter Credits</b></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><b><a class="" href="#">0</a></b></td>
+                                    <td><b>Purchased Letter Credits</b></td>
+                                    <td><b><a class="" href="/credits">GET MORE</a></b></td>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-10 col-md-10 col-sm-10">
+            <div class="col-md-10">
                 <h5 class="card-category">Earn free letters</h5>
                 <div class="card">
                     <div class="card-header">

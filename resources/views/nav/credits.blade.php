@@ -18,9 +18,9 @@
     </div>
     <div class="content">
         <div class="wrapper row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-md-12 col-sm-12">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" style="padding-bottom: 5%;">
                         <div class="card-header">
                         <h4>Select Quantity</h4>
                         </div>
@@ -35,28 +35,29 @@
                             </div>
                             <div class="credit-card col-sm-3">
                                 <div class="card-header">
-                                    <h5>Credit card detail</h5>
+                                    <h5>Select Payment Method</h5>
                                 </div>
                                 <hr>
                                 <form method="POST" action="{{ route('register') }}">
                                     @csrf
                                     <div class="form-group row">
                                         <div class="col-sm-12">
-                                            <input id="card-number" type="number" class="form-control" name="card-number" placeholder="Card Number" required>
+                                            <label class="">Card Number</label>
+                                            <input id="card-number" type="number" class="form-control" name="card-number" placeholder="Card Number" style="background-color:#F3F3F3;" required>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label class="">Cardholder Name</label>
+                                            <input id="card_name" type="text" class="form-control" name="card_name" placeholder="Cardholder Name" style="background-color:#F3F3F3;" required>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input id="month" type="date" class="form-control" name="month" required>
+                                            <label class="">Expiration Date</label>
+                                            <input type="text" class="form-control" name="date" style="background-color:#F3F3F3;" placeholder="mm/yy" required>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="date" class="form-control" name="year" required>
+                                            <label class="">CVV</label>
+                                            <input type="text" class="form-control" name="cvv" placeholder="CVV" style="background-color:#F3F3F3;" required>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <input type="text" class="form-control" name="cvv" placeholder="CVV" required>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <p>3 or 4 digits usually founds on the signature strip</p>
-                                        </div>
-                                </div>
+                                     </div>
                                     <div class="form-group row mb-0">
                                         <div class="col-md-12" style="text-align: center;">
                                             <button type="submit" class="btn  btn-sm btn-success col-sm-12"><strong>Proceed</strong></button>

@@ -36,8 +36,6 @@
     <script src="/js/bootstrap-notify.js"></script>
     <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="/js/now-ui-dashboard.js?v=1.0.1"></script>
-    <script src="/js/contact_search.js"></script>
-
   </head>
 <body>
 
@@ -83,14 +81,14 @@
                 </li>
                 <li>
                     <a data-tab="tracker" href="/tracker">
-                    <i class="material-icons" style="font-size:36px">location_on</i>
+                    <i class="material-icons" style="font-size:27px">location_on</i>
                         Tracker
                     </a>
                 </li>
                 <li class="log-out">
                     <a class="nav-link nav-link-logout" data-tab="logout" href="/logout">
                         <i class="fas fa-power-off"></i>
-                        Log out
+                        Log Out
                     </a>
                 </li>
                 <li>
@@ -103,15 +101,14 @@
         <div class="container-fluid">
             <div class="navbar-wrapper">
                 <div class="navbar-toggle">
-                    <button type="button" class="navbar-toggler">
+                    <button type="button" class="navbar-toggler btn  btn-info">
                         <span class="navbar-toggler-bar bar1"></span>
                         <span class="navbar-toggler-bar bar2"></span>
                         <span class="navbar-toggler-bar bar3"></span>
                     </button>
                 </div>
-                <a class="navbar-brand" href="#"></a>
             </div>
-            <button class="btn btn-info navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="btn btn-info navbar-toggler navbar-hidden" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-bar navbar-kebab"></span>
                 <span class="navbar-toggler-bar navbar-kebab"></span>
                 <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -121,9 +118,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <div class="profile-img"  >
-                                <img src="/user.jpg"  alt="..">
+                                <img src="/login.png"  alt="..">
                             </div>
-                            <h6>Hello,{{$user->first_name}}</h6>
                         </a>
                     </li>
                 </ul>

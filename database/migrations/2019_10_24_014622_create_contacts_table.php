@@ -27,6 +27,7 @@ class CreateContactsTable extends Migration
             $table->string('facility_city');
             $table->string('facility_state');
             $table->string('facility_postal');
+            $table->string('image_primary');
         });
     }
 

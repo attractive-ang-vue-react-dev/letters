@@ -1,0 +1,7 @@
+@media screen and (max-width: 576px) {
+    .btn .btn-primary .btn-danger {
+        border-radius: none;
+        font-size: 10px;
+
+    }
+}

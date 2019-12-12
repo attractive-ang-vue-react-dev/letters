@@ -10,6 +10,8 @@
     background-color: white;
     border-radius: 4px;
     box-shadow: 0 0.6rem 1rem 0 rgba(53,55,86,0.3);
+    margin-left:6%;
+    margin-right:6%;
 }
 
 .form-header > img {

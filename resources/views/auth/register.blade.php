@@ -17,7 +17,6 @@
             <div class="login-form">
                 <div class="form-container">
 
-
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <div class="form-header col-sm-12" style="text-align:center;">
@@ -145,12 +144,10 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <a class="btn btn-sm btn-primary"style="width: 100%;background-color: white; color: black;"href="/">
-                <img src="google.svg" style="width:6%;">
+                <a class="btn btn-sm btn-primary"style="margin-left:6%; margin-right:6%;width: 87%;background-color: white; color:#2c2c2c;"href="/">
+                <img src="google.svg" style="width:8%;">
                 Sign Up with Google</a>
-            </div>
-            <div class="col-md-12">
-                <p style="font-size:16px; color:white;text-align:center;">By creating an account, you agree to the Terms of Service, and Privacy Policy.</p>
+                <p style="margin-left:6%; margin-right:6%;font-size:14px; color:white;text-align:center;">By creating an account, you agree to the Terms of Service, and Privacy Policy.</p>
             </div>
         </div>
     </div>

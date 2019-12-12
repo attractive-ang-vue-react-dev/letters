@@ -3,13 +3,11 @@
     max-width: 140px;
     vertical-align: -webkit-baseline-middle;
     position: relative;
-    left: 30px;
+    left: 15px;
 }
 
 .profile-img {
-    width:35%;
-    border: 2px solid white;
-
+    width:55px;
 }
 
 .profile-img > img {
@@ -59,12 +57,12 @@
 
 .sidebar-top-h {
   color: white;
-  font-size: 2em;
 }
 
 .log-out {
     position: relative;
     margin-top:50%;
+    bottom: 30px;
 }
 .sidebar-sticky {
   padding-top: 0px !important;
@@ -79,25 +77,8 @@
   margin-bottom: 5px;
 }
 
-button {
-  margin: 10px;
-}
-
-.nav-link i {
-  margin-right: 15px;
-  width: 20px;
-}
-
-
-.login-form {
-    border: 1px solid black;
-
-}
-
-
-.sent-text > h2 {
+.sent-text > h1 {
     position: relative;
-    overflow: hidden;
-    color: #2CA8FF;
+    color: #00A8EA;
   }
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Contact;
 use App\Letter;
+use App\User;
 
 class UserController extends Controller
 {
@@ -29,9 +30,11 @@ class UserController extends Controller
 
     public function letter() {
         $user = Auth::user();
+        $contacts = Contact::where('user_id', $user->id)->get();
         return view('nav.letter')->with([
           "user" => $user,
-          "tab" => "letter"
+          "tab" => "letter",
+          "contacts" => $contacts
         ]);
     }
 
@@ -67,19 +70,40 @@ class UserController extends Controller
         $user = Auth::user();
         $data = $request->validate([
             'name' => 'required',
-            'contact_id' => 'required',
             'content' => 'required',
-            ''
+            'file' =>'required'
         ]);
+        $folderPath = "img/upload/";
+        $img = $request->input('image_primary');
+
+        try {
+            $image_parts = explode(";base64,", $img);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $file_primary = $folderPath . uniqid() . "." . $image_type;
+            file_put_contents($file_primary, $image_base64);
+            $file_primary = "/" . $file_primary;
+        } catch( \Exception $e){
+            $file_primary = "";
+        }
+
+        $user_data = array(
+            'sent' => $request->name,
+            'content' => $request->content,
+            'delivered' => $request->$file_primary
+        );
+
+
         $inmate_number = $request->contact_id;
         $contacts = Contact::where('inmate_number', $inmate_number)->get();
         return view('nav.review')->with([
             "user" => $user,
             "tab" => "review",
-            "contacts" => [
-                "name" => $request->name,
-                "contact_id" => $request->contact_id,
-                "content" => $request->content,
+            "user_data" => [
+                'sent' => $request->name,
+                'content' => $request->content,
+                'delivered' => $request->$file_primary
             ]
         ]);
     }

@@ -24,12 +24,12 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row card-body col-sm-12">
-                                <div class="col-sm-3">
-                                    <img src="/login.png" style="border-radius:50%;" alt="..">
+                                <div class="logo-image">
+                                    <h3 style="text-transform: uppercase;"></h3>
                                 </div>
                                 <div class="col-sm-9">
                                     <h6>
-                                        {{ $contacts['name'] }}
+                                        {{ $user_data['sent'] }}
                                     </h6>
                                 </div>
                             </div>
@@ -44,11 +44,13 @@
                             <div class="card-body">
                                 <div class="row card-body col-sm-12">
                                     <div class="col-sm-3">
-                                        <img src="/user.jpg" style="border-radius:50%;" alt="..">
+                                       <div class="logo-image">
+                                           <h3 style="text-transform: uppercase;">{{ $user->facility_name }}</h3>
+                                       </div>
                                     </div>
                                     <div class="col-sm-9">
                                         <h6>{{ $user-> first_name }} {{ $user-> last_name }}</h6>
-                                        <h6>{{ $user-> addr_line_1 }},{{ $user-> addr_line_2 }}, {{ $user-> city }}, {{ $user-> state }}</h6>
+                                        <h6>{{ $user-> addr_line_1 }},{{ $user-> addr_line_2 }}, {{ $user-> city }}, {{ $user-> state }}, {{ $user->facility_name }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -62,13 +64,13 @@
                     <div class="card">
                         <form action="/send" method="POST" enctype="multipart/form-data">
                             <div class="card-body">
-                                <div class="row card-body col-sm-12">
+                                <div class="row card-body">
                                     <div class="col-sm-3">
-                                        <img src="/user.jpg" style="border-radius:50%;" alt="..">
+                                        <img src="/login.png" alt="..">
                                     </div>
                                     <div class="col-sm-9">
                                         <h6>
-                                        {{ $contacts['content'] }}
+                                        {{ $user_data['content'] }}
                                         </h6>
                                         <hr>
                                         <h6>From: {{ $user-> first_name }} {{ $user-> last_name }}</h6>
@@ -86,7 +88,7 @@
                         <form action="/send" method="POST" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="card-chart col-sm-12">
-                                    <img src="/bg5.jpg">
+                                   <img src="/{{ $user_data['delivered'] }}">
                                 </div>
                             </div>
                         </form>

@@ -17,8 +17,8 @@
     border: 1px solid rgb(112, 111, 111) !important;
 }
     .search_icon{
-        height: 43px;
-        width: 6%;
+        height: 40px;
+        width: 5%;
         float: right;
         display: flex;
         justify-content: center;
@@ -43,8 +43,6 @@
     }
 
     .inputfile + label {
-        font-size: 1.25em;
-        font-weight: 700;
         color: white !important;
         background-color:#2CA8FF;
         display: inline-block;
@@ -52,12 +50,3 @@
         border-radius: 25px;
     }
 
-    .inputfile:focus + label,
-    .inputfile + label:hover {
-        box-shadow: 0 0.6rem 1rem 0 rgba(53,55,86,0.3);;
-    }
-
-    .inputfile:focus + label {
-        outline: 1px dotted #000;
-        outline: -webkit-focus-ring-color auto 5px;
-    }
