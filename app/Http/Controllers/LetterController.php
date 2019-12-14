@@ -53,6 +53,8 @@ class LetterController extends Controller
         $to_state,
         $to_zip
       ];
+
+
     }
 
     public function html($letter_id) {

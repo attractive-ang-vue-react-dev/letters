@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('state');
             $table->string('postal');
 
-            $table->float('credit')->default(5);
+            $table->float('credit')->default(4);
 
             $table->string('type')->default('user'); // user, admin
         });
