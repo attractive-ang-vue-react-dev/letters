@@ -25,7 +25,7 @@ class LetterController extends Controller
       $contact = Contact::find($data["contact_id"]);
       $content = $data["content"];
 
-      $from_name = $user->first_name . " " $user->last_name;
+      $from_name = $user->first_name . " " . $user->last_name;
       $from_address_1 = $user->addr_line_1;
       $from_address_2 = $user->addr_line_2;
       $from_city = $user->city;
