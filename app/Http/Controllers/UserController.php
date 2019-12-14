@@ -207,7 +207,7 @@ class UserController extends Controller
       if ($is_draft) {
         return redirect("/history")->with("success", "You've saved a draft!");
       } else {
-        $lob_key = env("LOB_TEST_KEY");
+        $lob_key = env("LOB_KEY");
 
         $lob = new \Lob\Lob($lob_key);
 
