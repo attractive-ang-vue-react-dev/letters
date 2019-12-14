@@ -266,7 +266,8 @@ class UserController extends Controller
           'from' => $lob_from,
           'file' => url("/letters/html/" . $new_letter->id),
           'description' => 'Letter from ' . $user->first_name . " " . $user->last_name . " to Inmate # " . $contact->inmate_number,
-          'color' => true
+          'color' => true,
+          'mail_type' => 'usps_first_class'
         ));
 
         $new_letter->sent = true;
