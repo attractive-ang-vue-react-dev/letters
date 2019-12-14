@@ -54,4 +54,23 @@ class LetterController extends Controller
         $to_zip
       ];
     }
+
+    public function html($letter_id) {
+      $letter = Letter::find($letter_id);
+
+      $date = \Carbon\Carbon::parse($letter->created_at)->toFormattedDateString();
+
+      $attached_img = $letter->attached_img_src;
+      $content = strip_tags($letter->content);
+
+      if ($attached_img) {
+        $letter_content = "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 4in;}</style><p class='date'>$date</p><p class='content'>$content</p><p><img src='data:image/png;base64, $attached_img' style='max-width: 5in;'></p><p style='font-size: 12px; color: #aaa;'>This letter was sent for free. Learn more at <b><i>ameelio.org</i></b>.</p></body></html>";
+      } else {
+        $letter_content = "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 4in;}</style><p class='date'>$date</p><p class='content'>$content</p><p style='font-size: 12px; color: #aaa;'>This letter was sent for free. Learn more at <b><i>ameelio.org</i></b>.</p></body></html>";
+      }
+
+      $letter_content = str_replace("\n", "<br>", $letter_content);
+
+      return $letter_content;
+    }
 }

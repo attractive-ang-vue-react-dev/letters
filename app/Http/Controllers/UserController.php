@@ -157,7 +157,7 @@ class UserController extends Controller
         'attached_image' => 'image|max:5000'
       ]);
 
-      if ($data["attached_image"]) {
+      if (isset($data["attached_image"])) {
         $attached_img = base64_encode(file_get_contents($data["attached_image"]));
       } else {
         $attached_img = false;
@@ -207,7 +207,7 @@ class UserController extends Controller
       if ($is_draft) {
         return redirect("/history")->with("success", "You've saved a draft!");
       } else {
-        $lob_key = env("LOB_KEY");
+        $lob_key = env("LOB_TEST_KEY");
 
         $lob = new \Lob\Lob($lob_key);
 
@@ -312,24 +312,5 @@ class UserController extends Controller
       $letter->delete();
 
       return redirect()->back()->with("success", "You've deleted a letter.");
-    }
-
-    public function letter_html($letter_id) {
-      $letter = Letter::find($letter_id);
-
-      $date = \Carbon\Carbon::parse($letter->created_at)->toFormattedDateString();
-
-      $attached_img = $letter->attached_img_src;
-      $content = $letter->content;
-
-      if ($attached_img) {
-        $letter_content = "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 4in;}</style><p class='date'>$date</p><p class='content'>$content</p><p><img src='data:image/png;base64, $attached_img' style='max-width: 5in;'></p><p style='font-size: 12px; color: #aaa;'>This letter was sent for free. Learn more at <b><i>ameelio.org</i></b>.</p></body></html>";
-      } else {
-        $letter_content = "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 4in;}</style><p class='date'>$date</p><p class='content'>$content</p><p style='font-size: 12px; color: #aaa;'>This letter was sent for free. Learn more at <b><i>ameelio.org</i></b>.</p></body></html>";
-      }
-
-      $letter_content = str_replace("\n", "<br>", $letter_content);
-
-      return $letter_content;
     }
 }

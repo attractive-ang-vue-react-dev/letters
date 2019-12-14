@@ -29,6 +29,6 @@ Route::get('/history', 'UserController@history');
 Route::get('/credits', 'UserController@credits');
 Route::get('/profile', 'UserController@profile');
 
-Route::get('/letters/html/{letter_id}', 'UserController@letter_html');
+Route::get('/letters/html/{letter_id}', 'LetterController@html');
 
 Auth::routes();
