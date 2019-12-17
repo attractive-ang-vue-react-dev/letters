@@ -7,7 +7,7 @@
     </div>
     <h1 class="sub-logo">Letters</h1>
     <div class="row justify-content-center">
-        <div class="col-sm-4 col-md-4 col-lg-4">
+        <div class="col-md-4 col-sm-6 col-lg-4">
             <div class="login-form">
                 <div class="form-header col-sm-12" style="text-align:center;">
                     <img src="/login.png">
