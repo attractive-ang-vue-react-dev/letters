@@ -40,6 +40,7 @@
                             <div class="col-sm-6">
                                 <form action="/contacts/search" method="POST">
                                     @csrf
+
                                     <div class="searchbar">
                                         <input type="text" class="form-control" name="filter" required autocomplete="filter" placeholder="Start typing a recipient's name or inmate number">
                                         <button type="submit" class="btn  btn-primary search_icon" id="search_btn"><i class="fas fa-search"></i></button>
@@ -71,10 +72,8 @@
                                             <td>{{ $c->inmate_number }}</td>
                                             <td>{{ $c->first_name }} {{ $c->middle_name }} {{ $c->last_name}}</td>
                                             <td>{{ $c->facility_name }}</td>
-                                            <td class="row col-sm-6">
-                                                <a class="btn btn-sm btn-primary" href="/compose">Letter</a>
-                                                <a class="btn btn-sm btn-danger" href="/contacts/remove/{{ $c->id }}" onclick="return confirm('Are you sure?');">Remove</a>
-                                            </td>
+                                            <td style="width:5%;"><a class="btn btn-sm btn-primary" href="/compose">Letter</a></td>
+                                            <td><a class="btn btn-sm btn-danger" href="/contacts/remove/{{ $c->id }}" onclick="return confirm('Are you sure?');">Remove</a></td>
                                         </tr>
                                     @endforeach
                                     <div class="col-sm-1">{{ $contacts->links() }}</div>

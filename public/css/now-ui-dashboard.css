@@ -849,7 +849,8 @@ fieldset[disabled]
   line-height: normal;
   font-size: 1em;
   transition: none !important;
-  box-shadow: none; }
+  box-shadow: none;
+  height: 40px !important; }
   .form-control:focus {
     border: 1px solid #f96332;
     -webkit-box-shadow: none;
@@ -1102,9 +1103,11 @@ fieldset[disabled]
 .input-group-btn:last-child > .btn {
   margin-left: 0; }
 
+.select3 {
+  height: 250px !important;
+}
 textarea.form-control {
   max-width: 100%;
-  max-height: 250px;
   padding: 10px 10px 0 0;
   resize: none;
   border-bottom: 1px solid #E3E3E3;
@@ -1230,8 +1233,27 @@ p.description {
 
   .credit-card {
     padding-bottom:2%;
-
+    min-width: 360px;
+    padding-right: 10%;
   }
+
+  input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+    zoom: 1.5;
+}
+
+.form-check {
+  position: relative;
+  display: block;
+  padding-left: 2.25rem;
+}
+
+.form-check-input {
+  position: absolute;
+  margin-top: .2rem;
+  margin-left: -1.25rem;
+}
 
 .category,
 .card-category {
@@ -3549,6 +3571,9 @@ Created using IcoMoon - icomoon.io
 }
 
 @media screen and (max-width: 576px) {
+    .logo img {
+      width:50%;
+    }
     img {
         width: 40%;
     }

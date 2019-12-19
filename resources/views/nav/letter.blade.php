@@ -27,23 +27,12 @@
                             @foreach($contacts->all() as $c)
                                 <table class="table">
                                     <thead>
-                                        <!-- <tr>
-                                            <td>
-                                                <div class=" logo-image">
-                                                    <h3 style="text-transform: uppercase;">{{ $user->facility_name}} </h3>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="">
-                                                    <h6>{{ $user->first_name}}<br>{{ $user->created_at }}<br>Sent</h6>
-                                                </div>
-                                            </td>
-                                        </tr> -->
+                                        
                                     </thead>
                                 </table>
                             @endforeach
                             @else
-                                <div class="card-category">You didn't send any message.</div>
+                                <div class="card-category" style="text-transform:none;">No messages have been sent.</div>
                             @endif
                             <hr>
                         <i class='far fa-clock'></i> Last 7 days
@@ -56,12 +45,12 @@
                 <h4 class="card-category">Compose Letter</h4>
                 <div class="card">
                     <div class="card-header">
-                        <button class="btn btn-sm btn-primary">Compose Letter</button>
+                        <a class="btn btn-sm btn-primary" href="/compose">Compose Letter</a>
                     </div>
                     <div class="card-body">
                         <div class="container">
                             <div class="chart-area">
-                                <h6>Send your letter before 5pm EST for same day processing.</h6>
+                            <label style="font-size:19px;">Send your letter before 5pm EST for same day processing.</label>
                             </div>
                         </div>
                     </div>
@@ -93,7 +82,7 @@
                 <h5 class="card-category">Earn free letters</h5>
                 <div class="card">
                     <div class="card-header">
-                        <h6>Earn a letter credit by sharing with your friends and family.</h6>
+                    <label style="font-size:19px;">Earn a letter credit by sharing with your friends and family.</label>
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-sm btn-primary">Share Link</button>

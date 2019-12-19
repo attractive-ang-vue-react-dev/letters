@@ -20,11 +20,7 @@
   margin: 0;
   padding: 0;
   text-align: center;
-  padding: 2em;
-}
-
-.logo img {
-  max-width: 30%;
+  padding: 3em;
 }
 
 .sub-logo {
@@ -32,7 +28,7 @@
   text-align: center;
   color: white;
   font-size: 2em;
-  margin-bottom: 6%;
+
 }
 
 .btn {

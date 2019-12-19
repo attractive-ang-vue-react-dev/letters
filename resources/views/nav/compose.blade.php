@@ -80,16 +80,16 @@
                                 @csrf
                                 <div class="form-group">
                                     <select class="form-control select1" name="name" required>
-                                        <option></option>
+                                        <option>Test</option>
                                         @foreach($contacts as $c )
-                                        <option >{{$c-> first_name}} {{$c-> middle_name }} {{$c-> last_name}}, {{$c-> facility_name}},{{$c-> inmate_number}}, {{$c-> facility_address}}, {{$c-> facility_city}} ,{{$c-> facility_state}},{{$c-> facility_postal}}</option>
+                                        <option ><h6>{{$c-> first_name}} {{$c-> middle_name }} {{$c-> last_name}},<br>{{$c-> inmate_number}}, {{$c-> facility_address}}</h6> <h6>{{$c-> facility_city}}</h6><h6>{{$c-> facility_state}},{{$c-> facility_postal}}<h6></option>
                                         @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <textarea class="form-control select3"  rows="20" name="content" placeholder="Start typing your letter here..." onKeyDown="limitText(this.form.content,this.form.countdown,3000);" onKeyUp="limitText(this.form.content,this.form.countdown,3000);" required></textarea>
-                                    <h6 style="float:right;">Characters Left: <input readonly type="text" style="border: none;font-weight:600;"name="countdown" size="3" value="3000"></h6>
+                                    <h6 style="float:right;">Characters Left: <input readonly type="text" style="border: none;font-weight:600;"name="countdown" size="4" value="3000"></h6>
                                 </div>
                                 <div class="state">
                                     <input type="file" name="file" id="file" accept="image/gif, image/jpeg, image/png" name="image"  class="inputfile" />

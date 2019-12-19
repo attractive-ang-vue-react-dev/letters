@@ -2,27 +2,23 @@
 
 @section('content')
 
-
-
-
-
 <div class="logo">
-  <img src="/logo.png">
+  <img src="/logo.png" style="width:30%;">
 </div>
 
 <h1 class="sub-logo">Letters</h1>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-5">
+        <div class="col-lg-5 col-md-7 ">
             <div class="login-form">
                 <div class="form-container">
 
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <div class="form-header col-sm-12" style="text-align:center;">
-                            <img src="/login.png" id="profile-img-tag" style="width: 20%;border-radius:50%;">
+                            <img src="/login.png" id="profile-img-tag" style="width: 60px;height:60px;border-radius:50%;">
                             <div class="state">
-                                <input type="file" name="file" id="file" accept="image/gif, image/jpeg, image/png" name="image" id="file"  class="inputfile" />
+                                <input type="file" name="file" id="file" accept="image/gif, image/jpeg, image/png" name="image"  class="inputfile" />
                                 <label for="file">Choose Image</label>
                             </div>
                         </div>
@@ -58,7 +54,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <input id="addr_line_2" type="text" class="form-control @error('addr_line_2') is-invalid @enderror" name="addr_line_2" value="{{ old('addr_line_2') }}" autocomplete="addr_line_2" autofocus placeholder="Address Line 2">
+                                <input id="addr_line_2" type="text" class="form-control @error('addr_line_2') is-invalid @enderror" name="addr_line_2" value="{{ old('addr_line_2') }}" autocomplete="addr_line_2" placeholder="Address Line 2">
                                 @error('addr_line_2')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -69,7 +65,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-4">
-                                <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" autofocus placeholder="City">
+                                <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required autocomplete="city"  placeholder="City">
                                 @error('city')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -86,7 +82,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-4">
-                                <input id="postal" type="text" class="form-control @error('postal') is-invalid @enderror" name="postal" value="{{ old('postal') }}" required autocomplete="postal" autofocus placeholder="ZIP Code">
+                                <input id="postal" type="text" class="form-control @error('postal') is-invalid @enderror" name="postal" value="{{ old('postal') }}" required autocomplete="postal" autofocus placeholder="Zip Code">
 
                                 @error('postal')
                                     <span class="invalid-feedback" role="alert">
@@ -144,10 +140,10 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <a class="btn btn-sm btn-primary"style="margin-left:6%; margin-right:6%;width: 87%;background-color: white; color:#2c2c2c;"href="/">
-                <img src="google.svg" style="width:8%;">
-                Sign Up with Google</a>
-                <p style="margin-left:6%; margin-right:6%;font-size:14px; color:white;text-align:center;">By creating an account, you agree to the Terms of Service, and Privacy Policy.</p>
+                <a class="btn btn-sm btn-primary"style="margin-left:10%; margin-right:10%;width: 79%;background-color: white; color:#2c2c2c;"href="/">
+                <img src="google.svg" style="width:20px;">
+                &nbsp;Sign Up with Google</a>
+                <p style="margin-left:10%; margin-right:10%;font-size:14px; color:white;text-align:center;">By creating an account, you agree to the Terms of Service, and Privacy Policy.</p>
             </div>
         </div>
     </div>

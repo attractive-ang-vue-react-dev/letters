@@ -29,12 +29,8 @@ Route::get('/compose', 'UserController@compose');
 Route::get('/contacts', 'UserController@contacts');
 Route::get('/history', 'UserController@history');
 Route::get('/credits', 'UserController@credits');
-
 Route::get('/review', 'UserController@review');
 Route::get('/sent', 'UserController@sent');
 Route::get('/tracker', 'UserController@tracker');
-Route::get('/profile', 'UserController@profile');
-
-Route::get('/letters/html/{letter_id}', 'LetterController@html');
 
 Auth::routes();

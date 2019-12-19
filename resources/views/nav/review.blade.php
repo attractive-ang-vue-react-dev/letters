@@ -50,7 +50,8 @@
                                     </div>
                                     <div class="col-sm-9">
                                         <h6>{{ $user-> first_name }} {{ $user-> last_name }}</h6>
-                                        <h6>{{ $user-> addr_line_1 }},{{ $user-> addr_line_2 }}, {{ $user-> city }}, {{ $user-> state }}, {{ $user->facility_name }}</h6>
+                                        <h6>{{ $user-> addr_line_1 }},{{ $user-> addr_line_2 }}</h6>
+                                        <h6> {{ $user-> city }}, {{ $user-> state }}, {{ $user->facility_name }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -69,9 +70,9 @@
                                         <img src="/login.png" alt="..">
                                     </div>
                                     <div class="col-sm-9">
-                                        <h6>
+                                        <label style="max-height:150px; overflow-y:auto;">
                                         {{ $user_data['content'] }}
-                                        </h6>
+                                        </label>
                                         <hr>
                                         <h6>From: {{ $user-> first_name }} {{ $user-> last_name }}</h6>
                                     </div>

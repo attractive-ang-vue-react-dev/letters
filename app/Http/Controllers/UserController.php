@@ -138,7 +138,7 @@ class UserController extends Controller
         return view('nav.compose')->with([
         "user" => $user,
         "tab" => "compose",
-        "contacts" => $contacts
+        "contacts" => []
         ]);
     }
 
@@ -156,7 +156,7 @@ class UserController extends Controller
         return view('nav.contacts')->with([
         "user" => $user,
         "tab" => "contacts",
-        "contacts" => $contacts
+        "contacts" => []
         ]);
     }
 
@@ -241,17 +241,6 @@ class UserController extends Controller
       $letter_id = $request->input('letter_id');
       $contact_id = $request->input('contact_id');
       $content = $request->input('content');
-
-      $data = $request->validate([
-        'attached_image' => 'image|max:5000'
-      ]);
-
-      if (isset($data["attached_image"])) {
-        $attached_img = base64_encode(file_get_contents($data["attached_image"]));
-      } else {
-        $attached_img = false;
-      }
-      
       $is_draft = $request->input('is_draft');
 
       if ($is_draft == "yes") {
@@ -345,8 +334,7 @@ class UserController extends Controller
           'from' => $lob_from,
           'file' => "<!DOCTYPE html><html lang='en' dir='ltr'><head><meta charset='utf-8'><title></title><link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'></head><body><style>* {font-family: 'Montserrat', sans-serif;} .date {margin-top: 20%;}</style><p class='date'>$date</p><p class='content'>$content</p></body></html>",
           'description' => 'Letter from ' . $user->first_name . " " . $user->last_name . " to Inmate # " . $contact->inmate_number,
-          'color' => true,
-          'mail_type' => 'usps_first_class'
+          'color' => false
         ));
 
         $new_letter->sent = true;

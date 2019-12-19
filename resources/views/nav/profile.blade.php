@@ -1,6 +1,7 @@
 @extends('layouts.letters')
 
 @section('content')
+<link rel="stylesheet" href="/css/profile.css">
   <main role="main" class="content ml-sm-auto  px-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">Profile</h1>
@@ -18,87 +19,92 @@
     <div class="content">
         <div class="wrapper">
             <div class="row">
-                <div class="col-lg-8 col-sm-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-category">Bio</h5>
+                <form action="/profile/save" method="POST" class="container-fluid">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-8 ">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-category">Bio</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 ">
+                                            <label>First Name</label>
+                                            <input class="form-control" type="text" name="first_name" value="{{ $user->first_name }}" placeholder="First Name" required>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <label>Last Name</label>
+                                            <input class="form-control" type="text" name="last_name" value="{{ $user->last_name }}" placeholder="Last Name" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <label>Address 1</label>
+                                            <input class="form-control" type="text" name="addr_line_1" value="{{ $user->addr_line_1 }}" placeholder="Address Line 1" required>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <label>Address 2</label>
+                                            <input class="form-control" type="text" name="addr_line_2" value="{{ $user->addr_line_2 }}" placeholder="APT/Unit" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <label>City</label>
+                                        <input class="form-control" type="text" name="city" value="{{ $user->city }}" placeholder="City" required>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <label>State</label>
+                                        <input class="form-control" type="text" name="state" value="{{ $user->state }}" placeholder="State" required>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <label>ZIP Code</label>
+                                            <input class="form-control" type="text" name="postal" value="{{ $user->postal }}" placeholder="ZIP Code" required>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <button class="btn btn-sm btn-primary" type="submit">Save</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <form action="/profile/save" method="POST">
-                                @csrf
-
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 ">
-                                        <label>First Name</label>
-                                        <input class="form-control" type="text" name="first_name" value="{{ $user->first_name }}" placeholder="First Name" required>
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <label>Last Name</label>
-                                        <input class="form-control" type="text" name="last_name" value="{{ $user->last_name }}" placeholder="Last Name" required>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <label>Address 1</label>
-                                        <input class="form-control" type="text" name="addr_line_1" value="{{ $user->addr_line_1 }}" placeholder="Address Line 1" required>
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <label>Address 2</label>
-                                        <input class="form-control" type="text" name="addr_line_2" value="{{ $user->addr_line_2 }}" placeholder="APT/Unit" required>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <label>City</label>
-                                    <input class="form-control" type="text" name="city" value="{{ $user->city }}" placeholder="City" required>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-3 col-sm-3">
-                                        <label>State</label>
-                                    <input class="form-control" type="text" name="state" value="{{ $user->state }}" placeholder="State" required>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-3 col-sm-3">
-                                        <label>ZIP Code</label>
-                                        <input class="form-control" type="text" name="postal" value="{{ $user->postal }}" placeholder="ZIP Code" required>
+                        <div class="col-lg-4">
+                            <div class="card card-user">
+                                <div class="image"></div>
+                                <div class="card-body">
+                                    <div class="author">
+                                        <div class="form-header col-sm-12" style="text-align:center;">
+                                            <img src="/login.png" id="profile-img-change" style="width: 80px;height:80px;border-radius:50%;">
+                                            <div class="state">
+                                                <input type="file" name="file" id="file" accept="image/gif, image/jpeg, image/png" name="image"   class="changefile" />
+                                                <label for="file">Change photo</label>
+                                            </div>
+                                        </div>
+                                        <h5 class="h4">{{ $user->first_name }}  {{ $user->last_name }}</h5>
+                                        <label style="font-size:19px;">Member since {{$user->created_at->format('F j, Y') }}</label>
                                     </div>
                                 </div>
                                 <hr>
-                                <button class="btn btn-sm btn-primary" type="submit">Save</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-12">
-                    <div class="card card-user">
-                        <div class="image"></div>
-                        <div class="card-body">
-                            <div class="author">
-                                <a href="#">
-                                    <img class="avatar border-gray" src="/login.png" alt="..." >
-                                </a>
-                                <h5 class="title">{{ $user->first_name }}  {{ $user->last_name }}</h5>
-                                <h6 class="title">Member since {{$user->created_at }}</h6>
+                                <div class="button-container">
+                                    <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </button>
+                                    <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                                        <i class="fab fa-twitter"></i>
+                                    </button>
+                                    <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                                        <i class="fab fa-instagram"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <hr>
-                        <div class="button-container">
-                            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                                <i class="fab fa-facebook-f"></i>
-                            </button>
-                            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                                <i class="fab fa-twitter"></i>
-                            </button>
-                            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                                <i class="fab fa-instagram"></i>
-                            </button>
-                        </div>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-sm-12">
@@ -156,7 +162,7 @@
                                     <tr>
                                         <td><b><a class="" href="#">0</a></b></td>
                                         <td><b>Purchased Letter Credits</b></td>
-                                        <td><b><a class="" href="#">GET MORE</a></b></td>
+                                        <td><b><a class="" href="/credits">GET MORE</a></b></td>
                                     </tr>
                                 </thead>
                             </table>
@@ -168,4 +174,20 @@
         </div>
     </div>
   </main>
+
+  <script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#profile-img-change').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#file").change(function(){
+        readURL(this);
+    });
+</script>
 @endsection
