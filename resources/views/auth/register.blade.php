@@ -117,7 +117,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-5 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-5 col-form-label text-md-right"><p style="font-size:14px;">{{ __('Confirm Password') }}</p></label>
                             <div class="col-md-7">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
