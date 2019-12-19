@@ -1232,7 +1232,7 @@ p.description {
 
   .credit-card {
     padding-bottom:2%;
-    min-width: 360px;
+    max-width: 450px;
     padding-right: 10%;
   }
 
