@@ -1386,7 +1386,9 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
   border-left: 4px solid transparent; }
 
 .form-check {
-  margin-top: .5rem; }
+  margin-top: 1rem;
+  margin-bottom:1rem;
+}
 
 .form-check .form-check-label {
   display: inline-block;
