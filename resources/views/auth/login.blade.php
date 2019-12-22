@@ -62,6 +62,9 @@
                     </form>
                 </div>
             </div>
+            <div class="col-md-12">
+                <p style="margin-top:1em;margin-left:6%; margin-right:6%;font-size:14px; color:white;text-align:center;">By creating an account, you agree to the Terms of Service, and Privacy Policy.</p>
+            </div>
         </div>
     </div>
 
